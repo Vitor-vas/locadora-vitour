@@ -147,7 +147,7 @@ No front-end, `src/api.ts` é a camada de serviço: com `VITE_USE_MOCK=true` usa
 
 | Pacotes (Back-end) | Pacotes (Front-end) |
 | :---: | :---: |
-| <img src="docs/uml/backend.png" alt="Diagrama de Pacotes do Back-end" width="400"> | <img src="docs/uml/frontend.png" alt="Diagrama de Pacotes do Front-end" width="400"> |
+| <img src="docs/uml/backend.png" alt="Diagrama de Pacotes do Back-end" width="400"> |
 
 Os códigos-fonte dos diagramas estão em [`docs/uml`](./docs/uml).
 
@@ -439,29 +439,3 @@ Ainda não há testes automatizados no front-end.
 * 📖 [PlantUML](https://plantuml.com/)
 * 📖 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
----
-
-## 👥 Autores
-
-<!-- TODO: preencher com os integrantes -->
-| 👤 Nome | :octocat: GitHub | 💼 LinkedIn |
-|---------|-----------------|-------------|
-| Nome 1  | [@usuario1](https://github.com/usuario1) | [perfil](https://www.linkedin.com/in/usuario1) |
-| Nome 2  | [@usuario2](https://github.com/usuario2) | [perfil](https://www.linkedin.com/in/usuario2) |
-
----
-
-## 🤝 Contribuição
-
-1. Faça um `fork` do projeto.
-2. Crie uma branch (`git checkout -b feature/minha-feature`).
-3. Faça o commit (`git commit -m 'feat: adiciona nova funcionalidade X'`), seguindo o [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
-4. Envie a branch (`git push origin feature/minha-feature`).
-5. Abra um **Pull Request**.
-
----
-
-## 📄 Licença
-
-<!-- TODO: adicionar o arquivo LICENSE à raiz do repositório -->
-Este projeto é distribuído sob a **[Licença MIT](./LICENSE)**.
