@@ -14,7 +14,7 @@ export default function Layout() {
     <>
       {/* y negativo -> barra "desce" ao entrar */}
       <motion.header className="glass nav" initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-        <strong className="logo">◆ DriveRent</strong>
+        <strong className="logo">◆ Locadora Vitour</strong>
         <nav className="row">{links.map(([to, t]) => <NavLink key={to} to={to}>{t}</NavLink>)}</nav>
         <div className="row"><small>{user?.username} · {user?.agentType ?? user?.role}</small>
           <Btn onClick={() => { signOut(); nav('/login') }}>Sair</Btn></div>

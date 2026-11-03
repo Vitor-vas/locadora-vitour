@@ -13,7 +13,7 @@ export default function Login() {
   }
   return (
     <div className="center"><Glass className="auth">
-      <h1>◆ DriveRent</h1><p className="muted">Entre para gerenciar seus aluguéis</p>
+      <h1>◆ Locadora Vitour</h1><p className="muted">Entre para gerenciar seus aluguéis</p>
       <form onSubmit={submit} className="stack">
         <Field label="Usuário" value={username} onChange={(e) => setU(e.target.value)} required />
         <Field label="Senha" type="password" value={password} onChange={(e) => setP(e.target.value)} required />

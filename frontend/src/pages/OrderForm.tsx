@@ -17,14 +17,16 @@ export default function OrderForm() {
 
   useEffect(() => {
     (async () => {
-      const [c, cl, u] = await Promise.all([api.cars.list(), api.clients.list(), api.users.list()])
+      // GET /clients é exclusivo de agentes: o cliente usa só o próprio perfil (user.clientId).
+      const noClients: Client[] = []
+      const [c, cl, u] = await Promise.all([api.cars.list(), user?.role === 'AGENTE' ? api.clients.list() : noClients, api.users.list()])
       setCars(c); setClients(cl); setBancos(u.filter((x) => x.agentType === 'BANCO'))
       if (id) {
         const o = await api.orders.get(id)
         if (o) setF({ clientId: o.clientId, carId: o.carId, inicio: o.inicio, fim: o.fim, credito: !!o.credito, bancoId: o.credito?.bancoId ?? '', valor: String(o.credito?.valor ?? '') })
       }
     })()
-  }, [id])
+  }, [id, user?.role])
 
   async function submit(e: FormEvent) {
     e.preventDefault()

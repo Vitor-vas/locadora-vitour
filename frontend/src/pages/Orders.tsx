@@ -10,13 +10,15 @@ export default function Orders() {
   const { user } = useAuth()
   const [list, setList] = useState<Order[]>([]), [cl, setCl] = useState<Client[]>([]), [cars, setCars] = useState<Car[]>([])
   const [filter, setFilter] = useState<OrderStatus | ''>('')
+  const isAgent = user?.role === 'AGENTE'
   const load = useCallback(async () => {
-    const [o, c, k] = await Promise.all([api.orders.list(), api.clients.list(), api.cars.list()])
+    // GET /clients é exclusivo de agentes (403 para cliente), então o cliente nem tenta carregar a lista.
+    const noClients: Client[] = []
+    const [o, c, k] = await Promise.all([api.orders.list(), isAgent ? api.clients.list() : noClients, api.cars.list()])
     setList(o); setCl(c); setCars(k)
-  }, [])
+  }, [isAgent])
   useEffect(() => { load() }, [load])
 
-  const isAgent = user?.role === 'AGENTE'
   // Cliente enxerga só os próprios pedidos; agente vê todos.
   const rows = list.filter((o) => (isAgent || o.clientId === user?.clientId) && (!filter || o.status === filter))
   const cancel = async (id: string) => { if (confirm('Cancelar este pedido?')) { await api.orders.update(id, { status: 'CANCELADO' }); load() } }
