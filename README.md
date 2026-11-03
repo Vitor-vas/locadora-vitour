@@ -146,7 +146,6 @@ No front-end, `src/api.ts` é a camada de serviço: com `VITE_USE_MOCK=true` usa
 | <img src="docs/uml/casos-de-uso.png" alt="Diagrama de Casos de Uso" width="400"> | <img src="docs/uml/classes.png" alt="Diagrama de Classes" width="400"> |
 
 | Pacotes (Back-end) | 
-| :---: | :---: |
 | <img src="docs/uml/backend.png" alt="Diagrama de Pacotes do Back-end" width="400"> |
 
 Os códigos-fonte dos diagramas estão em [`docs/uml`](./docs/uml).
