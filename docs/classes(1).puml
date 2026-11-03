@@ -1,0 +1,89 @@
+@startuml classes
+title Sistema de Aluguel de Carros - Diagrama de Classes (pacote model)
+skinparam classAttributeIconSize 0
+hide empty members
+
+enum Role {
+  CLIENTE
+  AGENTE
+}
+
+enum AgentType {
+  EMPRESA
+  BANCO
+}
+
+enum Owner {
+  CLIENTE
+  EMPRESA
+  BANCO
+}
+
+enum OrderStatus {
+  PENDENTE
+  APROVADO
+  REPROVADO
+  CONTRATADO
+  CANCELADO
+}
+
+class AppUser <<users>> {
+  - id : UUID
+  - username : String {unique}
+  - passwordHash : String
+  - role : Role
+  - agentType : AgentType
+}
+
+class Client <<clients>> {
+  - id : UUID
+  - rg : String
+  - cpf : String {unique}
+  - nome : String
+  - endereco : String
+  - profissao : String
+}
+
+class Employer <<embeddable>> {
+  - entidade : String
+  - rendimento : BigDecimal
+}
+
+class Car <<cars>> {
+  - id : UUID
+  - matricula : String {unique}
+  - ano : int
+  - marca : String
+  - modelo : String
+  - placa : String {unique}
+  - proprietario : Owner
+}
+
+class RentalOrder <<rental_orders>> {
+  - id : UUID
+  - inicio : LocalDate
+  - fim : LocalDate
+  - status : OrderStatus
+  - creditoValor : BigDecimal
+  - parecer : String
+  - criadoEm : Instant
+}
+
+AppUser --> Role
+AppUser --> AgentType : só se AGENTE
+Car --> Owner
+RentalOrder --> OrderStatus
+
+AppUser "0..1" -- "0..1" Client : perfil (só se CLIENTE)
+Client *-- "0..3" Employer : empregadores
+Client "1" <-- "0..*" RentalOrder : contratante
+Car "1" <-- "0..*" RentalOrder : automóvel alugado
+RentalOrder "0..*" --> "0..1" AppUser : creditoBanco\n(agente BANCO)
+
+note bottom of RentalOrder
+  Fluxo de status:
+  PENDENTE -> APROVADO | REPROVADO
+  APROVADO -> CONTRATADO
+  PENDENTE | APROVADO -> CANCELADO
+end note
+@enduml

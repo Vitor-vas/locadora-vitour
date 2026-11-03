@@ -1,0 +1,71 @@
+@startuml backend
+title Diagrama de Pacotes - Back-end (Spring Boot, MVC)
+skinparam packageStyle rectangle
+
+package "com.example.backend" {
+  package "controller\n(C)" as controller
+  package "service" as service
+  package "repository" as repository
+  package "model\n(M)" as model
+  package "dto" as dto
+  package "security" as security
+  package "config" as config
+}
+
+controller ..> service
+controller ..> dto
+controller ..> security
+service ..> repository
+service ..> model
+service ..> dto
+service ..> security
+repository ..> model
+dto ..> model
+security ..> repository
+security ..> model
+config ..> security
+config ..> repository
+config ..> model
+
+database "Supabase\n(PostgreSQL)" as db
+repository ..> db : JPA / Hibernate
+
+note right of controller
+  AuthController, ClientController,
+  CarController, OrderController,
+  UserController
+end note
+note right of service
+  AuthService, ClientService,
+  CarService, OrderService,
+  UserService
+end note
+note right of config
+  SecurityConfig, DataSeeder,
+  ApiExceptionHandler
+end note
+@enduml
+
+@startuml frontend
+title Diagrama de Pacotes - Front-end (React + Vite)
+skinparam packageStyle rectangle
+
+package "src" {
+  package "pages\n(V)" as pages
+  package "components" as components
+  package "context" as context
+  package "api\n(camada de serviço)" as api
+  package "types" as types
+}
+
+pages ..> components
+pages ..> context
+pages ..> api
+pages ..> types
+components ..> types
+context ..> api
+api ..> types
+
+cloud "Back-end Spring Boot\n(REST + JWT)" as back
+api ..> back : HTTP /api
+@enduml
